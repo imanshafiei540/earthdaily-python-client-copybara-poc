@@ -5,9 +5,12 @@ core.workflow(
         url = "file:///builds/earthdaily/eda/eds/client/earthdatastore",
         ref = "copybara-to-publich-to-github",
     ),
-    destination = git.destination(
-        url = "https://github.com/imanshafiei540/earthdaily-python-client-copybara-poc.git"
-        push = "refs/heads/beta/test/copybara",
+    destination = git.github_pr_destination(
+        url = "https://github.com/imanshafiei540/earthdaily-python-client-copybara-poc.git",
+        destination_ref = "beta/test/copybara",
+        pr_branch = "eda-sync-${CI_COMMIT_SHORT_SHA}",
+        title = "Public sync via Copybara PoC",
+        body = "This PR contains a filtered export excluding internal, secrets, tests, and the Copybara config itself.",
     ),
     origin_files = glob(
         include = [
@@ -18,6 +21,7 @@ core.workflow(
             "**/internal/**",
             "**/tests/**",
             "**/secrets/**",
+            "**/copy.bara.sky",
         ]
     ),
     transformations = [

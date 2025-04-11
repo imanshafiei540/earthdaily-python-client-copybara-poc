@@ -39,9 +39,8 @@ copybara_sync:
     - apt-get install -y curl git
     - git config --global user.name "Iman Shafiei"
     - git config --global user.email "iman.shafiei@earthdaily.com"
-    - git config --global credential.helper store
-    - echo "https://x-access-token:${GITHUB_PAT}@github.com" > ~/.git-credentials
   script:
+    - echo "https://x-access-token:${GITHUB_PAT}@github.com"
     - echo "Downloading Copybara..."
     - curl -LO https://github.com/google/copybara/releases/download/v20250224/copybara_deploy.jar
     - echo "Running Copybara from $(pwd)..."
