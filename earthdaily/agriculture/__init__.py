@@ -1,5 +1,7 @@
-from earthdaily._api_requester import APIRequester
-from earthdaily.legacy.core import options
+from pathlib import Path
+from typing import Optional
+
+from earthdaily.agriculture.core import options
 
 from . import datasets, earthdatastore  # noqa: F401
 from .accessor import (  # noqa: F401
@@ -9,9 +11,13 @@ from .accessor import (  # noqa: F401
 
 __all__ = ["options"]
 
+__version__ = "0.5.5"
+
 
 def EarthDataStore(
-    api_requester: APIRequester,
+    json_path: Optional[Path] = None,
+    toml_path: Optional[Path] = None,
+    profile: Optional[str] = None,
     presign_urls: bool = True,
     asset_proxy_enabled: bool = False,
 ) -> earthdatastore.Auth:
@@ -42,8 +48,11 @@ def EarthDataStore(
     Auth
         A :class:`earthdatastore.Auth` instance
     """
-    return earthdatastore.Auth(
-        api_requester=api_requester,
+    return earthdatastore.Auth.from_credentials(
+        json_path=json_path,
+        toml_path=toml_path,
+        profile=profile,
+        client_version=__version__,
         presign_urls=presign_urls,
         asset_proxy_enabled=asset_proxy_enabled,
     )

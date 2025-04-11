@@ -1,0 +1,26 @@
+core.workflow(
+    authoring = authoring.pass_thru("Iman <iman@example.com>"),
+    name = "local_test_sync",
+    origin = git.origin(
+        url = "file:///builds/earthdaily/eda/eds/client/earthdatastore",
+        ref = "copybara-to-publich-to-github",
+    ),
+    destination = git.destination(
+        url = "https://github.com/imanshafiei540/earthdaily-python-client-copybara-poc.git"
+        push = "refs/heads/beta/test/copybara",
+    ),
+    origin_files = glob(
+        include = [
+            "**",
+        ],
+        exclude = [
+            "**/.gitlab-ci.yml",
+            "**/internal/**",
+            "**/tests/**",
+            "**/secrets/**",
+        ]
+    ),
+    transformations = [
+        metadata.squash_notes("Local PoC sync via Copybara"),
+    ],
+)
