@@ -44,3 +44,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Support
 
 If you encounter any problems or have any questions, please [open an issue](https://github.com/earthdaily/earthdaily-python-client/issues/new) on our GitHub repository.
+
+
+### Test Section
+New commit has been pushed.
